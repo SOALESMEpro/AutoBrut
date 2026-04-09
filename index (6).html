@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoBrut — Vente de Voitures Sans Filtre</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noir: #0d0d0d;
+    --rouge: #e8272d;
+    --rouge-sombre: #a01a1f;
+    --blanc: #f2ede6;
+    --gris: #1a1a1a;
+    --gris-moyen: #2e2e2e;
+    --gris-clair: #888;
+    --accent: #f5c518;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--noir);
+    color: var(--blanc);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--noir);
+    border-bottom: 3px solid var(--rouge);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 70px;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    letter-spacing: 3px;
+    color: var(--blanc);
+  }
+
+  .logo span { color: var(--rouge); }
+
+  nav a {
+    color: var(--gris-clair);
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--rouge); }
+
+  .btn-deposer {
+    background: var(--rouge);
+    color: var(--blanc) !important;
+    padding: 10px 22px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .btn-deposer:hover { background: var(--rouge-sombre); color: var(--blanc) !important; }
+
+  /* HERO */
+  .hero {
+    padding: 80px 40px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .hero-text h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5.5rem;
+    line-height: 0.95;
+    letter-spacing: 2px;
+  }
+
+  .hero-text h1 .red { color: var(--rouge); }
+
+  .hero-text p {
+    margin-top: 24px;
+    font-size: 1.05rem;
+    color: var(--gris-clair);
+    line-height: 1.7;
+    max-width: 420px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .stat {
+    border-left: 3px solid var(--rouge);
+    padding-left: 16px;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--gris-clair);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .hero-img {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-img-placeholder {
+    width: 100%;
+    height: 300px;
+    background: var(--gris);
+    border: 1px solid #333;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--gris-clair);
+  }
+
+  .car-icon { font-size: 5rem; }
+
+  /* SEARCH BAR */
+  .search-section {
+    background: var(--gris);
+    border-top: 1px solid #2a2a2a;
+    border-bottom: 1px solid #2a2a2a;
+    padding: 30px 40px;
+  }
+
+  .search-bar {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .search-bar input, .search-bar select {
+    background: var(--noir);
+    border: 1px solid #333;
+    color: var(--blanc);
+    padding: 14px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    outline: none;
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .search-bar input:focus, .search-bar select:focus {
+    border-color: var(--rouge);
+  }
+
+  .search-bar select option { background: var(--noir); }
+
+  .btn-search {
+    background: var(--rouge);
+    color: var(--blanc);
+    border: none;
+    padding: 14px 36px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .btn-search:hover { background: var(--rouge-sombre); }
+
+  /* ANNONCES */
+  .annonces-section {
+    max-width: 1300px;
+    margin: 60px auto;
+    padding: 0 40px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+
+  .section-sub {
+    color: var(--gris-clair);
+    font-size: 0.9rem;
+    margin-bottom: 40px;
+  }
+
+  .annonces-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 24px;
+  }
+
+  /* CARTE ANNONCE */
+  .card {
+    background: var(--gris);
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--rouge);
+  }
+
+  .card-img {
+    width: 100%;
+    height: 200px;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--rouge);
+    color: var(--blanc);
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .card-body { padding: 20px; }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: var(--gris-clair);
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .card-meta span::before { content: '• '; }
+  .card-meta span:first-child::before { content: ''; }
+
+  .card-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #333;
+  }
+
+  .comment-count {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--gris-clair);
+  }
+
+  .comment-count .bubble {
+    background: var(--gris-moyen);
+    border-radius: 100px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    color: var(--blanc);
+  }
+
+  .btn-voir {
+    background: transparent;
+    border: 1px solid var(--rouge);
+    color: var(--rouge);
+    padding: 8px 18px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .btn-voir:hover {
+    background: var(--rouge);
+    color: var(--blanc);
+  }
+
+  /* MODAL ANNONCE */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 999;
+    overflow-y: auto;
+    padding: 40px 20px;
+  }
+
+  .modal-overlay.active { display: block; }
+
+  .modal {
+    background: var(--gris);
+    border: 1px solid #333;
+    border-radius: 4px;
+    max-width: 860px;
+    margin: 0 auto;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-header {
+    background: var(--noir);
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--rouge);
+  }
+
+  .modal-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: var(--gris-clair);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 8px;
+  }
+
+  .close-btn:hover { color: var(--rouge); }
+
+  .modal-body { padding: 30px; }
+
+  .modal-img {
+    width: 100%;
+    height: 260px;
+    background: #1e1e1e;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    margin-bottom: 24px;
+  }
+
+  .modal-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .info-item {
+    background: var(--noir);
+    padding: 14px 18px;
+    border-radius: 2px;
+    border-left: 3px solid var(--rouge);
+  }
+
+  .info-label {
+    font-size: 0.72rem;
+    color: var(--gris-clair);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .info-val {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .modal-desc {
+    color: var(--gris-clair);
+    line-height: 1.8;
+    font-size: 0.92rem;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--noir);
+    border-radius: 2px;
+  }
+
+  .modal-price-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: var(--noir);
+    border: 1px solid #333;
+    border-radius: 2px;
+    margin-bottom: 36px;
+  }
+
+  .modal-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+
+  .btn-contact {
+    background: var(--rouge);
+    color: var(--blanc);
+    border: none;
+    padding: 16px 36px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .btn-contact:hover { background: var(--rouge-sombre); }
+
+  /* COMMENTS SECTION */
+  .comments-section {
+    border-top: 2px solid var(--rouge);
+    padding-top: 30px;
+  }
+
+  .comments-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .comments-badge {
+    background: var(--rouge);
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  .no-filter-notice {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1f1200;
+    border: 1px solid #5a3a00;
+    color: var(--accent);
+    font-size: 0.78rem;
+    padding: 8px 14px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+    margin-top: 8px;
+  }
+
+  /* COMMENT FORM */
+  .comment-form {
+    background: var(--noir);
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 28px;
+  }
+
+  .comment-form h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    color: var(--gris-clair);
+  }
+
+  .form-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .comment-form input,
+  .comment-form textarea {
+    background: var(--gris);
+    border: 1px solid #333;
+    color: var(--blanc);
+    padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    border-radius: 2px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+
+  .comment-form input:focus,
+  .comment-form textarea:focus {
+    border-color: var(--rouge);
+  }
+
+  .comment-form textarea {
+    min-height: 100px;
+    resize: vertical;
+    margin-bottom: 12px;
+  }
+
+  .btn-commenter {
+    background: var(--rouge);
+    color: var(--blanc);
+    border: none;
+    padding: 12px 28px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .btn-commenter:hover { background: var(--rouge-sombre); }
+
+  /* LISTE DES COMMENTAIRES */
+  .comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .comment-item {
+    background: var(--noir);
+    border: 1px solid #262626;
+    border-radius: 4px;
+    padding: 16px 20px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .comment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .comment-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--rouge);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .author-tag {
+    font-size: 0.7rem;
+    color: var(--gris-clair);
+  }
+
+  .comment-date {
+    font-size: 0.75rem;
+    color: var(--gris-clair);
+  }
+
+  .comment-text {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #c8c2b8;
+  }
+
+  .like-btn {
+    background: none;
+    border: none;
+    color: var(--gris-clair);
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+    padding: 0;
+  }
+
+  .like-btn:hover { color: var(--accent); }
+  .like-btn.liked { color: var(--accent); }
+
+  /* DEPOSER ANNONCE SECTION */
+  .deposer-section {
+    max-width: 1300px;
+    margin: 60px auto;
+    padding: 0 40px;
+  }
+
+  .deposer-box {
+    background: var(--gris);
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .deposer-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .deposer-left p {
+    color: var(--gris-clair);
+    line-height: 1.8;
+    font-size: 0.92rem;
+  }
+
+  .annonce-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .annonce-form input,
+  .annonce-form select,
+  .annonce-form textarea {
+    background: var(--noir);
+    border: 1px solid #333;
+    color: var(--blanc);
+    padding: 14px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .annonce-form input:focus,
+  .annonce-form select:focus,
+  .annonce-form textarea:focus {
+    border-color: var(--rouge);
+  }
+
+  .annonce-form select option { background: var(--noir); }
+
+  .annonce-form textarea { min-height: 100px; resize: vertical; }
+
+  .form-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .btn-publier {
+    background: var(--rouge);
+    color: var(--blanc);
+    border: none;
+    padding: 16px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+    width: 100%;
+  }
+
+  .btn-publier:hover { background: var(--rouge-sombre); }
+
+  /* FOOTER */
+  footer {
+    background: var(--gris);
+    border-top: 1px solid #2a2a2a;
+    padding: 40px;
+    text-align: center;
+    color: var(--gris-clair);
+    font-size: 0.85rem;
+  }
+
+  footer strong { color: var(--rouge); font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; font-size: 1rem; }
+
+  /* NOTIFICATION */
+  .notif {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--rouge);
+    color: var(--blanc);
+    padding: 14px 24px;
+    border-radius: 2px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    z-index: 9999;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+
+  .notif.show { transform: translateY(0); opacity: 1; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 50px 20px; }
+    .hero-text h1 { font-size: 3.8rem; }
+    .hero-img { display: none; }
+    .deposer-box { grid-template-columns: 1fr; }
+    .modal-info-grid { grid-template-columns: 1fr; }
+    header { padding: 0 20px; }
+    .search-section, .annonces-section, .deposer-section { padding-left: 20px; padding-right: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">AUTO<span>BRUT</span></div>
+  <nav>
+    <a href="#annonces">Annonces</a>
+    <a href="#deposer">Vendre</a>
+    <a href="#deposer" class="btn-deposer">Déposer une annonce</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>LA BOURSE DE <span class="red">VOITURES</span> SANS BULLSHIT</h1>
+    <p>Achetez, vendez, et surtout — parlez librement. Les commentaires sont ouverts à tous. Pas de modération, pas de compte obligatoire. Juste des gens honnêtes.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num" id="countAnnonces">4</div>
+        <div class="stat-label">Annonces actives</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="countComments">9</div>
+        <div class="stat-label">Commentaires laissés</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Filtres sur les commentaires</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-img">
+    <div class="hero-img-placeholder">
+      <div class="car-icon">🚗</div>
+      <span style="font-size:0.85rem;letter-spacing:1px;text-transform:uppercase">Votre prochaine voiture vous attend</span>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-section">
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Marque, modèle, mot-clé..." oninput="filterAnnonces()">
+    <select id="filterBudget" onchange="filterAnnonces()">
+      <option value="">Budget max</option>
+      <option value="5000">Jusqu'à 5 000 €</option>
+      <option value="10000">Jusqu'à 10 000 €</option>
+      <option value="20000">Jusqu'à 20 000 €</option>
+      <option value="50000">Jusqu'à 50 000 €</option>
+    </select>
+    <select id="filterType" onchange="filterAnnonces()">
+      <option value="">Type de carburant</option>
+      <option value="Essence">Essence</option>
+      <option value="Diesel">Diesel</option>
+      <option value="Électrique">Électrique</option>
+      <option value="Hybride">Hybride</option>
+    </select>
+    <button class="btn-search" onclick="filterAnnonces()">CHERCHER</button>
+  </div>
+</div>
+
+<!-- ANNONCES -->
+<section class="annonces-section" id="annonces">
+  <div class="section-title">ANNONCES DU MOMENT</div>
+  <div class="section-sub">Cliquez sur une annonce pour voir les détails et lire les commentaires</div>
+  <div class="annonces-grid" id="annoncesGrid"></div>
+</section>
+
+<!-- DÉPOSER UNE ANNONCE -->
+<section class="deposer-section" id="deposer">
+  <div class="deposer-box">
+    <div class="deposer-left">
+      <h2>VENDEZ VOTRE <span style="color:var(--rouge)">VOITURE</span></h2>
+      <p>Déposez votre annonce gratuitement en 2 minutes. Pas de compte, pas d'abonnement. Les acheteurs potentiels pourront commenter directement — les bons et les mauvais avis.</p>
+      <div style="margin-top:30px;padding:20px;background:var(--noir);border-left:3px solid var(--rouge)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;margin-bottom:8px">POURQUOI AUTOBRUT ?</div>
+        <p style="font-size:0.85rem;color:var(--gris-clair);line-height:1.9">
+          ✔ Commentaires libres et non censurés<br>
+          ✔ Zéro inscription requise<br>
+          ✔ Visibilité immédiate<br>
+          ✔ Contact direct vendeur/acheteur
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="annonce-form">
+        <div class="form-2col">
+          <input type="text" id="f_marque" placeholder="Marque (ex: Renault)">
+          <input type="text" id="f_modele" placeholder="Modèle (ex: Clio)">
+        </div>
+        <div class="form-2col">
+          <input type="number" id="f_annee" placeholder="Année">
+          <input type="number" id="f_km" placeholder="Kilométrage">
+        </div>
+        <div class="form-2col">
+          <input type="number" id="f_prix" placeholder="Prix (€)">
+          <select id="f_carburant">
+            <option value="">Type de carburant</option>
+            <option>Essence</option>
+            <option>Diesel</option>
+            <option>Électrique</option>
+            <option>Hybride</option>
+          </select>
+        </div>
+        <input type="text" id="f_vendeur" placeholder="Votre prénom / pseudo">
+        <input type="text" id="f_ville" placeholder="Ville">
+        <textarea id="f_desc" placeholder="Description de la voiture..."></textarea>
+        <input type="text" id="f_contact" placeholder="Email ou téléphone">
+        <button class="btn-publier" onclick="publierAnnonce()">PUBLIER L'ANNONCE</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>AUTOBRUT</strong><br><br>
+  <span>La marketplace de voitures 100% libre. Les commentaires sont la propriété de leurs auteurs.</span><br>
+  <span style="font-size:0.75rem;margin-top:8px;display:block">© 2025 AutoBrut — Aucune donnée vendue, aucun commentaire censuré.</span>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle">Titre</h2>
+      <button class="close-btn" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif"></div>
+
+<script>
+// ===================== DATA =====================
+let annonces = [
+  {
+    id: 1,
+    marque: "Peugeot",
+    modele: "308",
+    annee: 2018,
+    km: 87000,
+    prix: 11500,
+    carburant: "Diesel",
+    ville: "Lyon",
+    vendeur: "Marc D.",
+    contact: "marc.d@mail.com",
+    emoji: "🔵",
+    desc: "Peugeot 308 1.6 BlueHDi 120ch Allure. Entretien à jour, carnet de bord complet. Pneus neufs posés en mars 2024. Première main, non fumeur. Légère rayure au bas de la portière arrière droite — visible sur photos à la demande.",
+    badge: "Première main",
+    comments: [
+      { id: 1, nom: "Julien", text: "J'ai essayé cette voiture la semaine dernière, le moteur fait un bruit bizarre au démarrage. Le vendeur m'a dit que c'était normal mais je suis pas convaincu...", date: "Il y a 2 jours", likes: 4, liked: false },
+      { id: 2, nom: "Carole", text: "11500 pour 87000km c'est honnête pour une 308 diesel. J'en ai eu une pendant 4 ans, zéro souci.", date: "Il y a 5 jours", likes: 7, liked: false },
+      { id: 3, nom: "Greg84", text: "La rayure « légère » c'est quand même bien visible sur Google Street View du parking du vendeur 😂 demandez des vraies photos", date: "Il y a 1 semaine", likes: 12, liked: false }
+    ]
+  },
+  {
+    id: 2,
+    marque: "Renault",
+    modele: "Zoe",
+    annee: 2021,
+    km: 34000,
+    prix: 16900,
+    carburant: "Électrique",
+    ville: "Paris",
+    vendeur: "Sophie L.",
+    contact: "07 45 xx xx xx",
+    emoji: "⚡",
+    desc: "Renault Zoe R135 Z.E.50, batterie incluse. Autonomie réelle ~300km en été, ~220km en hiver. Chargeur rapide DC inclus. Aucun accident, 2 clés, révisions Renault. Parfaite pour ville et périphérie parisienne.",
+    badge: "Batterie incluse",
+    comments: [
+      { id: 1, nom: "Bertrand", text: "16900€ pour une Zoe 2021 avec seulement 34k km c'est LE bon prix du moment. J'aurais dû acheter y'a 2 semaines avant que quelqu'un la vole.", date: "Il y a 1 jour", likes: 2, liked: false },
+      { id: 2, nom: "Anonyme", text: "Attention les Zoe ont un souci de corrosion sur le bas de caisse sur les modèles 2020-2021. À vérifier absolument avant achat.", date: "Il y a 3 jours", likes: 9, liked: false }
+    ]
+  },
+  {
+    id: 3,
+    marque: "BMW",
+    modele: "Série 3",
+    annee: 2016,
+    km: 142000,
+    prix: 14200,
+    carburant: "Essence",
+    ville: "Bordeaux",
+    vendeur: "Karim A.",
+    contact: "karim.auto@gmail.com",
+    emoji: "⚫",
+    desc: "BMW 320i F30, Pack Sport, boîte auto 8 rapports. Cuir Dakota noir, toit ouvrant, GPS Pro. Révisée chez BMW en janvier. Chaîne de distribution changée à 120 000 km. Voiture saine, pas tripatouillée.",
+    badge: "Pack Sport",
+    comments: [
+      { id: 1, nom: "Thomas_B", text: "142 000 km sur une Série 3 essence c'est encore jeune si l'entretien est suivi. Par contre demandez la facture de la chaîne de distrib, parce que sur les N20 ça coûte une blinde si c'est pas fait.", date: "Il y a 12h", likes: 15, liked: false },
+      { id: 2, nom: "Véronique", text: "Mon ex avait exactement ce modèle. La clim est tombée en panne deux fois. Bonne chance 🙃", date: "Il y a 4 jours", likes: 6, liked: false },
+      { id: 3, nom: "PaulAuto", text: "Prix correct pour le marché actuel. J'en ai vendu 3 similaires cette année entre 13 et 15k€.", date: "Il y a 1 semaine", likes: 3, liked: false }
+    ]
+  },
+  {
+    id: 4,
+    marque: "Dacia",
+    modele: "Sandero",
+    annee: 2020,
+    km: 52000,
+    prix: 8900,
+    carburant: "Essence",
+    ville: "Toulouse",
+    vendeur: "Lucie F.",
+    contact: "lucie.f@hotmail.fr",
+    emoji: "🟠",
+    desc: "Dacia Sandero Stepway TCe 90, couleur orange, bluetooth, caméra de recul. Voiture de dame, toujours garée au garage. Aucune rayure, jantes comme neuves. Vends car déménagement à l'étranger.",
+    badge: "État neuf",
+    comments: [
+      { id: 1, nom: "Romain", text: "Voiture de dame ça veut pas dire grand chose mais une Sandero à 8900€ avec 52k km c'est solide. Dacia c'est du costaud.", date: "Il y a 3 jours", likes: 5, liked: false }
+    ]
+  }
+];
+
+let currentAnnonce = null;
+
+// ===================== RENDER =====================
+function renderAnnonces(list) {
+  const grid = document.getElementById('annoncesGrid');
+  grid.innerHTML = '';
+  list.forEach(a => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-img">
+        <div class="card-badge">${a.badge}</div>
+        <span style="font-size:5rem">${a.emoji}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${a.marque} ${a.modele}</div>
+        <div class="card-meta">
+          <span>${a.annee}</span>
+          <span>${a.km.toLocaleString('fr-FR')} km</span>
+          <span>${a.carburant}</span>
+          <span>${a.ville}</span>
+        </div>
+        <div class="card-price">${a.prix.toLocaleString('fr-FR')} €</div>
+        <div class="card-footer">
+          <div class="comment-count">
+            💬 <span class="bubble">${a.comments.length} commentaire${a.comments.length > 1 ? 's' : ''}</span>
+          </div>
+          <button class="btn-voir" onclick="openModal(${a.id})">VOIR →</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function filterAnnonces() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const budget = parseInt(document.getElementById('filterBudget').value) || Infinity;
+  const type = document.getElementById('filterType').value;
+  const filtered = annonces.filter(a => {
+    const matchQ = !q || (a.marque + ' ' + a.modele).toLowerCase().includes(q);
+    const matchBudget = a.prix <= budget;
+    const matchType = !type || a.carburant === type;
+    return matchQ && matchBudget && matchType;
+  });
+  renderAnnonces(filtered);
+}
+
+// ===================== MODAL =====================
+function openModal(id) {
+  const a = annonces.find(x => x.id === id);
+  if (!a) return;
+  currentAnnonce = a;
+  document.getElementById('modalTitle').textContent = `${a.marque} ${a.modele} — ${a.annee}`;
+  document.getElementById('modalBody').innerHTML = buildModalHTML(a);
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function buildModalHTML(a) {
+  let commentsHTML = a.comments.map(c => buildCommentHTML(c)).join('');
+  return `
+    <div class="modal-img">${a.emoji}</div>
+    <div class="modal-info-grid">
+      <div class="info-item"><div class="info-label">Marque / Modèle</div><div class="info-val">${a.marque} ${a.modele}</div></div>
+      <div class="info-item"><div class="info-label">Année</div><div class="info-val">${a.annee}</div></div>
+      <div class="info-item"><div class="info-label">Kilométrage</div><div class="info-val">${a.km.toLocaleString('fr-FR')} km</div></div>
+      <div class="info-item"><div class="info-label">Carburant</div><div class="info-val">${a.carburant}</div></div>
+      <div class="info-item"><div class="info-label">Ville</div><div class="info-val">${a.ville}</div></div>
+      <div class="info-item"><div class="info-label">Vendeur</div><div class="info-val">${a.vendeur}</div></div>
+    </div>
+    <div class="modal-desc">${a.desc}</div>
+    <div class="modal-price-bar">
+      <div>
+        <div style="font-size:0.75rem;color:var(--gris-clair);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Prix demandé</div>
+        <div class="modal-price">${a.prix.toLocaleString('fr-FR')} €</div>
+      </div>
+      <button class="btn-contact" onclick="contacter(${a.id})">CONTACTER LE VENDEUR</button>
+    </div>
+
+    <!-- COMMENTAIRES -->
+    <div class="comments-section">
+      <div class="comments-title">
+        COMMENTAIRES <span class="comments-badge" id="cbadge-${a.id}">${a.comments.length}</span>
+      </div>
+      <div class="no-filter-notice">
+        ⚠️ Les commentaires sont libres et non modérés. Tout le monde peut commenter sans compte.
+      </div>
+
+      <!-- FORM -->
+      <div class="comment-form">
+        <h4>LAISSER UN COMMENTAIRE</h4>
+        <div class="form-row">
+          <input type="text" id="c_nom_${a.id}" placeholder="Votre prénom ou pseudo (optionnel)">
+        </div>
+        <textarea id="c_text_${a.id}" placeholder="Votre commentaire sur cette annonce... Avis, question, expérience, tout est bienvenu."></textarea>
+        <button class="btn-commenter" onclick="addComment(${a.id})">PUBLIER LE COMMENTAIRE</button>
+      </div>
+
+      <!-- LIST -->
+      <div class="comments-list" id="comments-list-${a.id}">
+        ${commentsHTML}
+      </div>
+    </div>
+  `;
+}
+
+function buildCommentHTML(c) {
+  const initiale = c.nom ? c.nom[0].toUpperCase() : '?';
+  const colors = ['#e8272d','#e8792d','#2d7de8','#2de87a','#e8c72d','#c72de8'];
+  const color = colors[c.nom.charCodeAt(0) % colors.length];
+  return `
+    <div class="comment-item" id="comment-${c.id}">
+      <div class="comment-header">
+        <div class="comment-author">
+          <div class="avatar" style="background:${color}">${initiale}</div>
+          <div>
+            <div class="author-name">${c.nom || 'Anonyme'}</div>
+            <div class="author-tag">Visiteur libre</div>
+          </div>
+        </div>
+        <div class="comment-date">${c.date}</div>
+      </div>
+      <div class="comment-text">${escapeHTML(c.text)}</div>
+      <button class="like-btn ${c.liked ? 'liked' : ''}" onclick="toggleLike(event, ${c.id})" data-cid="${c.id}">
+        👍 ${c.liked ? 'Utile' : 'Utile'} (${c.likes})
+      </button>
+    </div>
+  `;
+}
+
+function addComment(annonceId) {
+  const a = annonces.find(x => x.id === annonceId);
+  if (!a) return;
+  const nom = document.getElementById(`c_nom_${annonceId}`).value.trim() || 'Anonyme';
+  const text = document.getElementById(`c_text_${annonceId}`).value.trim();
+  if (!text) { showNotif('Écrivez quelque chose avant de publier 😅'); return; }
+
+  const newComment = {
+    id: Date.now(),
+    nom: nom,
+    text: text,
+    date: "À l'instant",
+    likes: 0,
+    liked: false
+  };
+
+  a.comments.unshift(newComment);
+
+  // Update list
+  const list = document.getElementById(`comments-list-${annonceId}`);
+  list.insertAdjacentHTML('afterbegin', buildCommentHTML(newComment));
+
+  // Update badge
+  document.getElementById(`cbadge-${annonceId}`).textContent = a.comments.length;
+
+  // Clear
+  document.getElementById(`c_nom_${annonceId}`).value = '';
+  document.getElementById(`c_text_${annonceId}`).value = '';
+
+  // Update card count
+  updateStats();
+  renderAnnonces(annonces);
+
+  showNotif('Commentaire publié ! ✓');
+}
+
+function toggleLike(e, commentId) {
+  const btn = e.currentTarget;
+  // Find comment across all annonces
+  let found = null;
+  annonces.forEach(a => {
+    const c = a.comments.find(x => x.id === commentId);
+    if (c) found = c;
+  });
+  if (!found) return;
+  found.liked = !found.liked;
+  found.likes += found.liked ? 1 : -1;
+  btn.classList.toggle('liked', found.liked);
+  btn.textContent = `👍 Utile (${found.likes})`;
+}
+
+function contacter(annonceId) {
+  const a = annonces.find(x => x.id === annonceId);
+  showNotif(`Contact: ${a.contact}`);
+}
+
+// ===================== PUBLIER ANNONCE =====================
+function publierAnnonce() {
+  const marque = document.getElementById('f_marque').value.trim();
+  const modele = document.getElementById('f_modele').value.trim();
+  const annee = parseInt(document.getElementById('f_annee').value);
+  const km = parseInt(document.getElementById('f_km').value);
+  const prix = parseInt(document.getElementById('f_prix').value);
+  const carburant = document.getElementById('f_carburant').value;
+  const vendeur = document.getElementById('f_vendeur').value.trim() || 'Anonyme';
+  const ville = document.getElementById('f_ville').value.trim() || 'Non précisé';
+  const desc = document.getElementById('f_desc').value.trim();
+  const contact = document.getElementById('f_contact').value.trim();
+
+  if (!marque || !modele || !annee || !km || !prix || !carburant) {
+    showNotif('Merci de remplir les champs obligatoires'); return;
+  }
+
+  const emojis = ['🚗','🚙','🏎','🚕','🛻'];
+  const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+
+  const newAnnonce = {
+    id: Date.now(),
+    marque, modele, annee, km, prix, carburant, ville, vendeur, contact, emoji,
+    desc: desc || 'Aucune description fournie.',
+    badge: 'Nouveau',
+    comments: []
+  };
+
+  annonces.unshift(newAnnonce);
+  renderAnnonces(annonces);
+  updateStats();
+
+  // Clear form
+  ['f_marque','f_modele','f_annee','f_km','f_prix','f_vendeur','f_ville','f_desc','f_contact'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f_carburant').value = '';
+
+  showNotif('Annonce publiée avec succès ! 🎉');
+  document.getElementById('annonces').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ===================== UTILS =====================
+function escapeHTML(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showNotif(msg) {
+  const n = document.getElementById('notif');
+  n.textContent = msg;
+  n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), 3000);
+}
+
+function updateStats() {
+  document.getElementById('countAnnonces').textContent = annonces.length;
+  const total = annonces.reduce((sum, a) => sum + a.comments.length, 0);
+  document.getElementById('countComments').textContent = total;
+}
+
+// ===================== INIT =====================
+renderAnnonces(annonces);
+updateStats();
+</script>
+</body>
+</html>
